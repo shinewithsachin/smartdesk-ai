@@ -3,6 +3,7 @@ import requests
 import pandas as pd
 import plotly.express as px
 
+
 API_URL = "http://127.0.0.1:8000"  
 ADMIN_PASSWORD = "admin"
 
@@ -15,8 +16,16 @@ st.title("🎫 SmartDesk AI")
 st.markdown("### Intelligent IT Support & Ticket Automation System")
 st.divider()
 
+
 st.sidebar.title("🧭 Navigation")
 page = st.sidebar.radio("Go to:", ["Submit Ticket", "Track Ticket", "Admin Login"])
+
+
+
+st.sidebar.title("🧭 Navigation")
+page = st.sidebar.radio("Go to:", ["Submit Ticket", "Track Ticket", "Admin Login"])
+
+
 
 if page == "Submit Ticket":
     st.header("📩 Submit a Support Ticket")
@@ -43,6 +52,7 @@ if page == "Submit Ticket":
                     st.error(f"Failed to submit. Status: {res.status_code}")
             except Exception as e:
                 st.error(f"An error occurred: {e}")
+
 
 elif page == "Track Ticket":
     st.header("🔍 Track Your Ticket Status")
@@ -82,6 +92,7 @@ elif page == "Track Ticket":
             except Exception as e:
                 st.error(f"Error: {e}")
 
+
 elif page == "Admin Login":
     if not st.session_state['is_admin']:
         pwd = st.sidebar.text_input("Admin Password", type="password")
@@ -92,6 +103,7 @@ elif page == "Admin Login":
             else:
                 st.sidebar.error("Wrong Password")
     
+
     if st.session_state['is_admin']:
         st.header("📊 Admin Dashboard")
         if st.button("Logout"):
@@ -104,11 +116,13 @@ elif page == "Admin Login":
                 tickets = res.json()
                 df = pd.DataFrame(tickets)
                 
+
                 c1, c2 = st.columns(2)
                 c1.metric("Total Tickets", len(df))
                 c2.metric("Open Tickets", len(df[df['status'] == 'open']))
                 
                 st.divider()
+
 
                 if not df.empty:
                     chart1, chart2 = st.columns(2)
@@ -124,6 +138,7 @@ elif page == "Admin Login":
 
                 st.divider()
                 
+
                 st.subheader("🛠️ Resolve Tickets")
                 
                 open_tickets = [t for t in tickets if t.get('status') == 'open']
@@ -141,6 +156,7 @@ elif page == "Admin Login":
                         st.write(f"**Issue:** {ticket['description']}")
                         st.write(f"**AI Priority:** `{ticket.get('priority')}`")
                         
+
                         if st.button("🤖 Generate Draft Reply"):
                             with st.spinner("Asking AI..."):
                                 api_res = requests.post(f"{API_URL}/tickets/{t_id}/reply")
@@ -149,6 +165,7 @@ elif page == "Admin Login":
                                 else:
                                     st.error("AI Failed.")
                         
+
                         draft = st.session_state.get('draft_reply', "")
                         final_response = st.text_area("Final Response to User:", value=draft, height=150)
                         
@@ -158,6 +175,7 @@ elif page == "Admin Login":
                                     "status": "closed",
                                     "solution": final_response
                                 }
+
                                 patch_res = requests.patch(f"{API_URL}/tickets/{t_id}", json=update_payload)
                                 
                                 if patch_res.status_code == 200:
