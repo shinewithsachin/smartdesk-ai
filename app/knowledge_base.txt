@@ -1,0 +1,30 @@
+IT SUPPORT STANDARD OPERATING PROCEDURES (SOP)
+----------------------------------------------
+
+**CATEGORY: ACCESS & IDENTITY MANAGEMENT**
+Q: Password Reset Policy
+A: Employees can reset their passwords via the Self-Service Portal (ssp.company.com). If the account is locked due to multiple failed attempts, wait 15 minutes for auto-unlock. For immediate unlock, verify employee ID and manager approval.
+
+Q: Shared Drive Access
+A: Access to restricted folders (Finance, HR, Legal) requires a ticket approval from the specific department head. Once approved, IT will add the user to the respective Active Directory group within 4 hours.
+
+**CATEGORY: NETWORK & CONNECTIVITY**
+Q: VPN Connectivity Issues
+A: Standard troubleshooting: 1. Ensure Cisco AnyConnect is updated (v4.10+). 2. Switch the server region to 'US-East-Backup'. 3. Restart the router. If the issue persists, check if the user's ISP is blocking UDP traffic.
+
+Q: Wifi Slowness in Meeting Rooms
+A: Meeting rooms are high-density zones. Advise users to disconnect personal devices from the corporate network during peak hours. If speed is below 10Mbps, raise a ticket with the Network Infrastructure team to check Access Point (AP) load.
+
+**CATEGORY: SOFTWARE & LICENSING**
+Q: Requesting New Software (Adobe, Visio, Project)
+A: All paid software requests must include a cost center code and manager approval. Licenses are procured on the 1st and 15th of every month. For 'Standard' software (Chrome, VS Code, Slack), users can install them directly from the Company App Store without admin rights.
+
+Q: Application Crashing (Excel/Outlook)
+A: 1. Run the application in Safe Mode (hold Ctrl while opening). 2. Disable recently installed add-ins. 3. Run 'Quick Repair' from Control Panel > Programs and Features.
+
+**CATEGORY: HARDWARE**
+Q: Peripheral Replacement (Mouse/Keyboard/Headset)
+A: Standard peripherals can be replaced immediately at the IT Walk-up Desk (Floor 2). No approval needed for standard Logitech wired equipment. Wireless equipment requires a cost center charge-back.
+
+Q: Laptop Hardware Failures (Screen/Battery)
+A: If the device is under warranty (Dell/Mac), log a ticket with the Service Tag. Provide a loaner laptop to the user while repairs are scheduled. Turnaround time is typically 3-5 business days.

@@ -1,0 +1,21 @@
+description,category,priority
+My laptop screen goes black randomly when I am on Zoom calls,Hardware,Medium
+I forgot my password and cannot login to the HR portal,Access,High
+VPN is continuously disconnecting every 5 minutes,Network,High
+I need a license for Adobe Photoshop for the marketing project,Software,Low
+The printer on the 2nd floor is jamming paper,Hardware,Low
+Outlook is freezing when I try to attach large files,Software,Medium
+I am locked out of my Okta account after 3 failed attempts,Access,High
+Wifi is extremely slow in the conference room B,Network,Medium
+My mouse scroll wheel is broken and I need a replacement,Hardware,Low
+I need to install VS Code extensions but I dont have admin rights,Software,Low
+System shows 'Blue Screen of Death' then restarts,Hardware,High
+I cannot access the shared drive folder for Finance,Access,High
+Internet is down completely for the sales team,Network,Critical
+My keyboard spacebar is getting stuck,Hardware,Low
+Requesting access to the AWS production environment,Access,Medium
+Microsoft Excel crashes when opening the budget sheet,Software,Medium
+Monitor is flickering and hurting my eyes,Hardware,Medium
+I cannot connect to the office wifi on my phone,Network,Low
+Need to reset my SAP password immediately,Access,High
+The projector in the meeting room is not displaying color correctly,Hardware,Low
