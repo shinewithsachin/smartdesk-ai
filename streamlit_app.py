@@ -3,7 +3,6 @@ import requests
 import pandas as pd
 import plotly.express as px
 
-# --- CONFIGURATION ---
 API_URL = "http://127.0.0.1:8000"  
 ADMIN_PASSWORD = "admin"
 
@@ -16,11 +15,9 @@ st.title("🎫 SmartDesk AI")
 st.markdown("### Intelligent IT Support & Ticket Automation System")
 st.divider()
 
-# --- SIDEBAR ---
 st.sidebar.title("🧭 Navigation")
 page = st.sidebar.radio("Go to:", ["Submit Ticket", "Track Ticket", "Admin Login"])
 
-# --- PAGE 1: SUBMIT TICKET ---
 if page == "Submit Ticket":
     st.header("📩 Submit a Support Ticket")
     with st.form("ticket_form"):
@@ -36,7 +33,6 @@ if page == "Submit Ticket":
                     data = res.json()
                     st.success("✅ Ticket Submitted!")
                     
-                    # FIX 1: Robust ID Handling (Handles 'id' or '_id')
                     ticket_id = data.get('id') or data.get('_id')
                     if ticket_id:
                         st.code(ticket_id, language="text")
@@ -45,11 +41,9 @@ if page == "Submit Ticket":
                         st.warning("Ticket submitted, but ID was missing in response.")
                 else:
                     st.error(f"Failed to submit. Status: {res.status_code}")
-            # FIX 2: Show the REAL error instead of generic "Connection Failed"
             except Exception as e:
                 st.error(f"An error occurred: {e}")
 
-# --- PAGE 2: TRACK TICKET (User View) ---
 elif page == "Track Ticket":
     st.header("🔍 Track Your Ticket Status")
     ticket_id_input = st.text_input("Enter your Ticket ID:")
@@ -73,10 +67,8 @@ elif page == "Track Ticket":
 
                     st.markdown(f"**Description:** {my_ticket['description']}")
                     
-                    # SHOW REPLY
                     solution = my_ticket.get('solution')
                     
-                    # Debug helper (Optional: remove later)
                     if status == 'closed' and not solution:
                         st.warning("Debug: Ticket is closed but solution is empty.")
 
@@ -90,9 +82,7 @@ elif page == "Track Ticket":
             except Exception as e:
                 st.error(f"Error: {e}")
 
-# --- PAGE 3: ADMIN LOGIN ---
 elif page == "Admin Login":
-    # Login Logic
     if not st.session_state['is_admin']:
         pwd = st.sidebar.text_input("Admin Password", type="password")
         if st.sidebar.button("Login"):
@@ -102,7 +92,6 @@ elif page == "Admin Login":
             else:
                 st.sidebar.error("Wrong Password")
     
-    # Admin Dashboard
     if st.session_state['is_admin']:
         st.header("📊 Admin Dashboard")
         if st.button("Logout"):
@@ -115,14 +104,12 @@ elif page == "Admin Login":
                 tickets = res.json()
                 df = pd.DataFrame(tickets)
                 
-                # 1. METRICS
                 c1, c2 = st.columns(2)
                 c1.metric("Total Tickets", len(df))
                 c2.metric("Open Tickets", len(df[df['status'] == 'open']))
                 
                 st.divider()
 
-                # 2. CHARTS
                 if not df.empty:
                     chart1, chart2 = st.columns(2)
                     with chart1:
@@ -137,7 +124,6 @@ elif page == "Admin Login":
 
                 st.divider()
                 
-                # 3. TICKET MANAGEMENT
                 st.subheader("🛠️ Resolve Tickets")
                 
                 open_tickets = [t for t in tickets if t.get('status') == 'open']
@@ -155,7 +141,6 @@ elif page == "Admin Login":
                         st.write(f"**Issue:** {ticket['description']}")
                         st.write(f"**AI Priority:** `{ticket.get('priority')}`")
                         
-                        # Generate Draft
                         if st.button("🤖 Generate Draft Reply"):
                             with st.spinner("Asking AI..."):
                                 api_res = requests.post(f"{API_URL}/tickets/{t_id}/reply")
@@ -164,7 +149,6 @@ elif page == "Admin Login":
                                 else:
                                     st.error("AI Failed.")
                         
-                        # Edit & Send
                         draft = st.session_state.get('draft_reply', "")
                         final_response = st.text_area("Final Response to User:", value=draft, height=150)
                         
@@ -174,7 +158,6 @@ elif page == "Admin Login":
                                     "status": "closed",
                                     "solution": final_response
                                 }
-                                # Call PATCH
                                 patch_res = requests.patch(f"{API_URL}/tickets/{t_id}", json=update_payload)
                                 
                                 if patch_res.status_code == 200:

@@ -16,7 +16,6 @@ def ticket_helper(ticket) -> dict:
         "priority": ticket.get("priority", "medium"),
         "category": ticket.get("category", "general"),
         "status": ticket.get("status", "open"),
-        # ✅ NEW FIELDS (These were missing!)
         "solution": ticket.get("solution"), 
         "suggested_reply": ticket.get("suggested_reply")
     }
