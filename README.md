@@ -94,6 +94,7 @@ If you want to run this locally:
 ---
 
 ## 📬 Contact
-Created by **[Your Name]** * [LinkedIn Profile](https://www.linkedin.com/in/sachin-iiitg/)
+Created by **Sachin Kumar** 
+* [LinkedIn Profile](https://www.linkedin.com/in/sachin-iiitg/)
 * [GitHub Profile](https://github.com/shinewithsachin)
 * [My Portfolio](https://build-your-portfolio-ceetocb.gamma.site/untitled-lsuym)
